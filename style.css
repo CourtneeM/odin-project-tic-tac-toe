@@ -17,7 +17,7 @@ body {
   margin-top: 50px;
 }
 
-#gameboard div {
+.gameboard-square {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -25,4 +25,20 @@ body {
   height: 150px;
   font-size: 4rem;
   border: 1px solid #000;
+}
+
+.gameboard-square:nth-child(-n+3) {
+  border-top: none;
+}
+
+.gameboard-square:nth-child(n+7) {
+  border-bottom: none;
+}
+
+.gameboard-square:nth-child(3n+1) {
+  border-left: none;
+}
+
+.gameboard-square:nth-child(3n+3) {
+  border-right: none;
 }
