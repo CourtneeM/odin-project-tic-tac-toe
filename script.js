@@ -2,7 +2,7 @@ const gameBoard = (() => {
   const div = document.createElement("div");
   let gameboard = () => ["x", "x", "o", 
                          "x", "o", "o", 
-                         "o", "o", "o"];
+                         "o", "", "o"];
   return {gameboard};
 })();
 
@@ -49,6 +49,14 @@ const gamePlay = (() => {
   return {win};
 })();
 
+let render = () => {
+  let gameboard = gameBoard.gameboard();
+  let gameboardSquares = document.querySelectorAll("#gameboard div");
+  for(let i = 0; i < gameboardSquares.length; i++) {
+    gameboardSquares[i].textContent = gameboard[i];
+  }
+}
+render();
 let player1 = Player("c", "X");
 let player2 = Player("t", "O");
 console.log(player1.getName(), player1.getSymbol());
