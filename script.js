@@ -1,4 +1,5 @@
 const gameBoard = (() => {
+  const div = document.createElement("div");
   let gameboard = () => ["x", "x", "o", 
                          "x", "o", "o", 
                          "o", "o", "o"];
