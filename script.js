@@ -11,8 +11,10 @@ const Player = (name, symbol) => {
   return {getName, getSymbol};
 }
 
-let player1 = Player("coco", "X");
-let player2 = Player("tee", "O");
+let player1Name = prompt("Player 1 name?")
+let player2Name = prompt("Player 2 name?")
+let player1 = Player(player1Name, "X");
+let player2 = Player(player2Name, "O");
 
 const displayStats = (() => {
   let resultsDiv = document.getElementById("stats");
@@ -105,5 +107,3 @@ const gamePlay = (() => {
 })();
 
 displayStats.displayPlayers();
-console.log(player1.getName(), player1.getSymbol());
-console.log(player2.getName(), player2.getSymbol());
