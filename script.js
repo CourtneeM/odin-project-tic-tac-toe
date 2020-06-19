@@ -90,18 +90,12 @@ const gamePlay = (() => {
     || (gameboardArr[2] === "O" && gameboardArr[4] === "O" && gameboardArr[6] === "O"))
     { gameWon = true;
       winner = `${player2.getName()} wins!`; 
-  } else if(moveCount === 9) {
-      winner = "It's a tie!";
-  }
-  if(winner != undefined) {
-    return winner;
-  }
-  // Look at refactoring win conditions later ( look at string.match() )
-  // let gameboardTop = gameboardArr.slice(0, 3);
-  // let horizontalWin = `x,x,x`;
-  // if(String(gameboardTop) === horizontalWin) {
-    //   return `${player1.getName()} wins!`;
-    // }
+    } else if(moveCount === 9) {
+        winner = "It's a tie!";
+    }
+    if(winner != undefined) 1{
+      return winner;
+    }
   };
   return {win};
 })();
