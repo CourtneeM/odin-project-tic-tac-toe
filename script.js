@@ -11,6 +11,31 @@ const Player = (name, symbol) => {
   return {getName, getSymbol};
 }
 
+let player1 = Player("coco", "X");
+let player2 = Player("tee", "O");
+
+const displayStats = (() => {
+  let resultsDiv = document.getElementById("stats");
+  let displayPlayers = () => {
+    let playersP = document.createElement("p");
+    playersP.textContent = `${player1.getName()} [X] vs. ${player2.getName()} [O]`;
+    resultsDiv.appendChild(playersP);
+  };
+  let displayWinner = () => {
+    let winnerDisplayed = false;
+    if(!winnerDisplayed) {
+      let winnerP = document.createElement("p");
+      let winner = gamePlay.win();
+      winnerP.textContent = winner;
+      winnerP.style.marginTop = "40px";
+      winnerP.style.fontWeight = "bold";
+      resultsDiv.appendChild(winnerP);
+      winnerDisplayed = true;
+    }
+   }
+  return {displayPlayers, displayWinner};
+})()
+
 const gamePlay = (() => {
   let gameboardArr = gameBoard.gameboardArr();
   let gameWon = false;
@@ -22,6 +47,7 @@ const gamePlay = (() => {
     }
     playerMove(e);
     win();
+    displayStats.displayWinner();
   });
   
   let playerMove = e => {
@@ -41,6 +67,7 @@ const gamePlay = (() => {
     console.log(gameboardArr);
   };
   const win = () => {
+    let winner;
     if((gameboardArr[0] === "X" && gameboardArr[1] === "X" && gameboardArr[2] === "X") 
     || (gameboardArr[3] === "X" && gameboardArr[4] === "X" && gameboardArr[5] === "X")
     || (gameboardArr[6] === "X" && gameboardArr[7] === "X" && gameboardArr[8] === "X")
@@ -50,7 +77,7 @@ const gamePlay = (() => {
     || (gameboardArr[0] === "X" && gameboardArr[4] === "X" && gameboardArr[8] === "X")
     || (gameboardArr[2] === "X" && gameboardArr[4] === "X" && gameboardArr[6] === "X"))
     { gameWon = true;
-      console.log( `${player1.getName()} wins!` );
+      winner = `${player1.getName()} wins!`;
     } else if((gameboardArr[0] === "O" && gameboardArr[1] === "O" && gameboardArr[2] === "O") 
     || (gameboardArr[3] === "O" && gameboardArr[4] === "O" && gameboardArr[5] === "O")
     || (gameboardArr[6] === "O" && gameboardArr[7] === "O" && gameboardArr[8] === "O")
@@ -60,9 +87,12 @@ const gamePlay = (() => {
     || (gameboardArr[0] === "O" && gameboardArr[4] === "O" && gameboardArr[8] === "O")
     || (gameboardArr[2] === "O" && gameboardArr[4] === "O" && gameboardArr[6] === "O"))
     { gameWon = true;
-      return `${player2.getName()} wins!`; 
+      winner = `${player2.getName()} wins!`; 
   } else if(moveCount === 9) {
-    console.log( `nobody wins` );
+      winner = "It's a tie!";
+  }
+  if(winner != undefined) {
+    return winner;
   }
   // Look at refactoring win conditions later ( look at string.match() )
   // let gameboardTop = gameboardArr.slice(0, 3);
@@ -71,18 +101,9 @@ const gamePlay = (() => {
     //   return `${player1.getName()} wins!`;
     // }
   };
+  return {win};
 })();
 
-// let render = () => {
-//   let gameboardArr = gameBoard.gameboardArr();
-//   let gameboardSquares = document.querySelectorAll("#gameboard div");
-//   for(let i = 0; i < gameboardSquares.length; i++) {
-//     gameboardSquares[i].textContent = gameboardArr[i];
-//   }
-// }
-
-// render();
-let player1 = Player("coco", "X");
-let player2 = Player("tee", "O");
+displayStats.displayPlayers();
 console.log(player1.getName(), player1.getSymbol());
 console.log(player2.getName(), player2.getSymbol());
