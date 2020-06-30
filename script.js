@@ -2,13 +2,13 @@ const gameBoard = (() => {
   let gameboardArr = () => ["", "", "", 
                             "", "", "", 
                             "", "", ""];
-  return {gameboardArr};
+  return { gameboardArr };
 })();
 
-const Player = (name, symbol) => {
+function Player(name, symbol) {
   const getName = () => name;
   const getSymbol = () => symbol;
-  return {getName, getSymbol};
+  return { getName, getSymbol };
 }
 
 let player1Name = prompt("Player 1 name?")
@@ -27,7 +27,7 @@ const displayStats = (() => {
     let winnerDisplayed = false;
     if(!winnerDisplayed) {
       let winnerP = document.createElement("p");
-      let winner = gamePlay.win();
+      let winner = gamePlay.winningMoves();
       winnerP.textContent = winner;
       winnerP.style.marginTop = "40px";
       winnerP.style.fontWeight = "bold";
@@ -35,7 +35,7 @@ const displayStats = (() => {
       winnerDisplayed = true;
     }
    }
-  return {displayPlayers, displayWinner};
+  return { displayPlayers, displayWinner };
 })()
 
 const gamePlay = (() => {
@@ -48,7 +48,7 @@ const gamePlay = (() => {
       return;
     }
     playerMove(e);
-    win();
+    winningMoves();
     displayStats.displayWinner();
   });
   
@@ -66,9 +66,8 @@ const gamePlay = (() => {
       }
       moveCount++;
     }
-    console.log(gameboardArr);
   };
-  const win = () => {
+  const winningMoves = () => {
     let winner;
     if((gameboardArr[0] === "X" && gameboardArr[1] === "X" && gameboardArr[2] === "X") 
     || (gameboardArr[3] === "X" && gameboardArr[4] === "X" && gameboardArr[5] === "X")
@@ -93,11 +92,11 @@ const gamePlay = (() => {
     } else if(moveCount === 9) {
         winner = "It's a tie!";
     }
-    if(winner != undefined) 1{
+    if(winner != undefined) {
       return winner;
     }
   };
-  return {win};
+  return { winningMoves };
 })();
 
 displayStats.displayPlayers();
